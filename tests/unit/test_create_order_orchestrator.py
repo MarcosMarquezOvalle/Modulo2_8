@@ -1,6 +1,9 @@
+from __future__ import annotations
+
 from decimal import Decimal
 
-from app.application.dto import CreateOrderInput, CreateOrderItemInput
+from app.application.dto import CreateOrderInput
+from app.application.dto import CreateOrderItemInput
 from app.application.orchestration.create_order_orchestrator import (
     CreateOrderOrchestrator,
 )
@@ -13,7 +16,13 @@ from app.infrastructure.repositories.in_memory import InMemoryOrderRepository
 def build_input() -> CreateOrderInput:
     return CreateOrderInput(
         customer_id="cust-1",
-        items=[CreateOrderItemInput(product_id="sku-1", quantity=1, unit_price=Decimal("3.00"))],
+        items=[
+            CreateOrderItemInput(
+                product_id="sku-1",
+                quantity=1,
+                unit_price=Decimal("3.00"),
+            ),
+        ],
     )
 
 

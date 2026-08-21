@@ -1,9 +1,12 @@
-from dataclasses import dataclass, field
+from __future__ import annotations
+
+from dataclasses import dataclass
+from dataclasses import field
 from datetime import datetime
 from decimal import Decimal
 from enum import Enum
-from typing import List
-from uuid import UUID, uuid4
+from uuid import UUID
+from uuid import uuid4
 
 
 class OrderStatus(str, Enum):
@@ -33,7 +36,7 @@ class OrderItem:
 class Order:
     id: UUID
     customer_id: str
-    items: List[OrderItem]
+    items: list[OrderItem]
     status: OrderStatus = OrderStatus.CREATED
     created_at: datetime = field(default_factory=datetime.utcnow)
 
@@ -46,5 +49,5 @@ class Order:
         return sum((item.subtotal for item in self.items), Decimal("0"))
 
     @classmethod
-    def new(cls, customer_id: str, items: List[OrderItem]) -> "Order":
+    def new(cls, customer_id: str, items: list[OrderItem]) -> Order:
         return cls(id=uuid4(), customer_id=customer_id, items=items)

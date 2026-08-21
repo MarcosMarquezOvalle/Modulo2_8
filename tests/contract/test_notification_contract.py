@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 from decimal import Decimal
 
 import pytest
 
-from app.domain.entities import Order, OrderItem
+from app.domain.entities import Order
+from app.domain.entities import OrderItem
+from app.infrastructure.notifications.http_simulator import HttpNotificationError
 from app.infrastructure.notifications.http_simulator import (
-    HttpNotificationError,
     HttpNotificationSimulatorAdapter,
 )
 

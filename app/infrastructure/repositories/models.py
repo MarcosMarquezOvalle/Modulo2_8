@@ -1,9 +1,18 @@
+from __future__ import annotations
+
 import uuid
 from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import DateTime, ForeignKey, Integer, Numeric, String
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy import DateTime
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import Numeric
+from sqlalchemy import String
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
 from sqlalchemy.types import Uuid
 
 
@@ -19,8 +28,9 @@ class OrderModel(Base):
     status: Mapped[str] = mapped_column(String(32), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
 
-    items: Mapped[list["OrderItemModel"]] = relationship(
-        back_populates="order", cascade="all, delete-orphan"
+    items: Mapped[list[OrderItemModel]] = relationship(
+        back_populates="order",
+        cascade="all, delete-orphan",
     )
 
 
@@ -33,4 +43,4 @@ class OrderItemModel(Base):
     quantity: Mapped[int] = mapped_column(Integer, nullable=False)
     unit_price: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
 
-    order: Mapped["OrderModel"] = relationship(back_populates="items")
+    order: Mapped[OrderModel] = relationship(back_populates="items")

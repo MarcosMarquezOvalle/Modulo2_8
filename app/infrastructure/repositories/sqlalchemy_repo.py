@@ -1,11 +1,15 @@
-from typing import List, Optional
+from __future__ import annotations
+
 from uuid import UUID
 
 from sqlalchemy.orm import Session
 
 from app.application.ports import OrderRepository
-from app.domain.entities import Order, OrderItem, OrderStatus
-from app.infrastructure.repositories.models import OrderItemModel, OrderModel
+from app.domain.entities import Order
+from app.domain.entities import OrderItem
+from app.domain.entities import OrderStatus
+from app.infrastructure.repositories.models import OrderItemModel
+from app.infrastructure.repositories.models import OrderModel
 
 
 class SqlAlchemyOrderRepository(OrderRepository):
@@ -34,13 +38,13 @@ class SqlAlchemyOrderRepository(OrderRepository):
         self._session.add(model)
         self._session.commit()
 
-    def get(self, order_id: UUID) -> Optional[Order]:
+    def get(self, order_id: UUID) -> Order | None:
         model = self._session.get(OrderModel, order_id)
         if model is None:
             return None
         return self._to_domain(model)
 
-    def list_by_customer(self, customer_id: str) -> List[Order]:
+    def list_by_customer(self, customer_id: str) -> list[Order]:
         models = (
             self._session.query(OrderModel)
             .filter(OrderModel.customer_id == customer_id)

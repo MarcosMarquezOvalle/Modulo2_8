@@ -1,5 +1,7 @@
-from abc import ABC, abstractmethod
-from typing import List, Optional
+from __future__ import annotations
+
+from abc import ABC
+from abc import abstractmethod
 from uuid import UUID
 
 from app.domain.entities import Order
@@ -10,16 +12,13 @@ class OrderRepository(ABC):
     such as InMemoryOrderRepository and SqlAlchemyOrderRepository."""
 
     @abstractmethod
-    def add(self, order: Order) -> None:
-        ...
+    def add(self, order: Order) -> None: ...
 
     @abstractmethod
-    def get(self, order_id: UUID) -> Optional[Order]:
-        ...
+    def get(self, order_id: UUID) -> Order | None: ...
 
     @abstractmethod
-    def list_by_customer(self, customer_id: str) -> List[Order]:
-        ...
+    def list_by_customer(self, customer_id: str) -> list[Order]: ...
 
 
 class NotificationPort(ABC):
@@ -27,5 +26,4 @@ class NotificationPort(ABC):
     Implemented by adapters such as HttpNotificationSimulatorAdapter."""
 
     @abstractmethod
-    def notify_order_created(self, order: Order) -> None:
-        ...
+    def notify_order_created(self, order: Order) -> None: ...

@@ -1,6 +1,10 @@
-from app.application.dto import CreateOrderInput, CreateOrderOutput
+from __future__ import annotations
+
+from app.application.dto import CreateOrderInput
+from app.application.dto import CreateOrderOutput
 from app.application.ports import OrderRepository
-from app.domain.entities import Order, OrderItem
+from app.domain.entities import Order
+from app.domain.entities import OrderItem
 
 
 class CreateOrderUseCase:

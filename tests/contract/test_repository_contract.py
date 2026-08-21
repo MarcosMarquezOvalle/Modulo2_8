@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from decimal import Decimal
 from uuid import uuid4
 
@@ -5,7 +7,8 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.domain.entities import Order, OrderItem
+from app.domain.entities import Order
+from app.domain.entities import OrderItem
 from app.infrastructure.repositories.in_memory import InMemoryOrderRepository
 from app.infrastructure.repositories.models import Base
 from app.infrastructure.repositories.sqlalchemy_repo import SqlAlchemyOrderRepository

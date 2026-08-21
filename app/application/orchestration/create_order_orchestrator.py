@@ -1,7 +1,11 @@
+from __future__ import annotations
+
 import logging
 
-from app.application.dto import CreateOrderInput, CreateOrderOutput
-from app.application.ports import NotificationPort, OrderRepository
+from app.application.dto import CreateOrderInput
+from app.application.dto import CreateOrderOutput
+from app.application.ports import NotificationPort
+from app.application.ports import OrderRepository
 from app.application.use_cases.create_order import CreateOrderUseCase
 
 logger = logging.getLogger(__name__)

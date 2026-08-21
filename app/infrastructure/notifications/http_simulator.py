@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 import logging
 import random
 import time
 from dataclasses import dataclass
-from typing import List
 
 from app.application.ports import NotificationPort
 from app.domain.entities import Order
@@ -42,7 +43,7 @@ class HttpNotificationSimulatorAdapter(NotificationPort):
         self._endpoint = endpoint
         self._failure_rate = failure_rate
         self._latency = simulated_latency_seconds
-        self.sent_requests: List[dict] = []
+        self.sent_requests: list[dict] = []
 
     def notify_order_created(self, order: Order) -> None:
         payload = {
